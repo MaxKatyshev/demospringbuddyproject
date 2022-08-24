@@ -9,12 +9,12 @@ import java.util.Objects;
 public class InsuranceDto implements Serializable {
     private final String name;
     private final String subject;
-    private final Long id;
+    private final Integer amount;
 
-    public InsuranceDto(String name, String subject, Long id) {
+    public InsuranceDto(String name, String subject, Integer amount) {
         this.name = name;
         this.subject = subject;
-        this.id = id;
+        this.amount = amount;
     }
 
     public String getName() {
@@ -25,8 +25,8 @@ public class InsuranceDto implements Serializable {
         return subject;
     }
 
-    public Long getId() {
-        return id;
+    public Integer getAmount() {
+        return amount;
     }
 
     @Override
@@ -36,12 +36,12 @@ public class InsuranceDto implements Serializable {
         InsuranceDto entity = (InsuranceDto) o;
         return Objects.equals(this.name, entity.name) &&
                 Objects.equals(this.subject, entity.subject) &&
-                Objects.equals(this.id, entity.id);
+                Objects.equals(this.amount, entity.amount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, subject, id);
+        return Objects.hash(name, subject, amount);
     }
 
     @Override
@@ -49,6 +49,6 @@ public class InsuranceDto implements Serializable {
         return getClass().getSimpleName() + "(" +
                 "name = " + name + ", " +
                 "subject = " + subject + ", " +
-                "id = " + id + ")";
+                "amount = " + amount + ")";
     }
 }
