@@ -16,16 +16,16 @@ public class WebSecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         //OAuth 2.0 Login
         http.oauth2Login(Customizer.withDefaults());
-        //Authorize Requests
-        http.authorizeRequests(authorizeRequests -> authorizeRequests
-                .antMatchers(HttpMethod.POST, "/api/v1/").hasRole("CLIENT")
-                .anyRequest().authenticated());
         //Headers management
         http.headers(Customizer.withDefaults());
         //Anonymous
         http.anonymous(Customizer.withDefaults());
         //CSRF
         http.csrf(Customizer.withDefaults());
+        //Authorize Requests
+        http.authorizeRequests(authorizeRequests -> authorizeRequests
+                .antMatchers(HttpMethod.POST, "/api/v1/").hasRole("CLIENT")
+                .anyRequest().permitAll());
         return http.build();
     }
 }

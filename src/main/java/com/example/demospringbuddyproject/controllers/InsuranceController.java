@@ -1,5 +1,6 @@
 package com.example.demospringbuddyproject.controllers;
 
+import com.example.demospringbuddyproject.constants.Status;
 import com.example.demospringbuddyproject.dto.InsuranceDto;
 import com.example.demospringbuddyproject.mappers.InsuranceMapper;
 import com.example.demospringbuddyproject.model.Insurance;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -52,5 +54,10 @@ public class InsuranceController {
         } catch (Exception exception) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
         }
+    }
+
+    @PostMapping("/changeStatus")
+    public Insurance changeInsuranceStatus(@RequestParam Long id, @RequestParam Status newStatus) {
+        return insuranceService.changeInsuranceStatus(id, newStatus);
     }
 }
