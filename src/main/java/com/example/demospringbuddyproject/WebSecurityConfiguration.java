@@ -14,8 +14,6 @@ public class WebSecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        //OAuth 2.0 Login
-        http.oauth2Login(Customizer.withDefaults());
         //Headers management
         http.headers(Customizer.withDefaults());
         //Anonymous
@@ -26,6 +24,17 @@ public class WebSecurityConfiguration {
         http.authorizeRequests(authorizeRequests -> authorizeRequests
                 .antMatchers(HttpMethod.POST, "/api/v1/").hasRole("CLIENT")
                 .anyRequest().permitAll());
+        http.oauth2ResourceServer(Customizer.withDefaults()
+        );
+        http.oauth2ResourceServer(Customizer.withDefaults()
+        );
+        //JWT Token
+        http.oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer
+                .jwt(Customizer.withDefaults())
+        );
+        http.oauth2Login(oauth2Login -> oauth2Login
+                .disable());
+        //OAuth 2.0 Login
         return http.build();
     }
 }
